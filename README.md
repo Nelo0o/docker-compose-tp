@@ -53,8 +53,8 @@ Petite application simple de gestion de compétences et projets, j'ai repris ça
 
 1. Clonez le repository :
 ```bash
-git clone https://github.com/votre-username/portfolio-manager.git
-cd portfolio-manager
+git clone https://github.com/Nelo0o/docker-compose-tp
+cd docker-compose-tp
 ```
 
 2. Lancez l'application avec Docker Compose :
@@ -88,20 +88,16 @@ portfolio-manager/
 │   └── package.json       # Dépendances backend
 └── docker-compose.yml     # Configuration Docker Compose
 ```
-
-L'application sera disponible sur :
-- Frontend : http://localhost:3000
-- Backend : http://localhost:5000
-- MongoDB : mongodb://localhost:27017
-- MongoDB Express (interface admin) : http://localhost:8081
-  - Identifiant : admin
-  - Mot de passe : admin123
-
 ### Hot Reload
-Le projet est configuré avec le hot reload pour le développement :
-- Les modifications du frontend sont rechargées instantanément
-- Le backend redémarre automatiquement avec nodemon
-- Les fichiers sont montés en volumes pour un développement fluide
+Le hot reload est implémenté grâce aux volumes Docker, permettant une synchronisation en temps réel entre votre machine locale et les conteneurs :
+```yaml
+volumes:
+  - ./frontend:/app    # Synchronise le code frontend
+  - ./backend:/app     # Synchronise le code backend
+```
+- Les modifications du code source sont automatiquement détectées grâce au montage des volumes
+- Le frontend utilise le hot reload natif de React avec les variables d'environnement `WATCHPACK_POLLING` et `CHOKIDAR_USEPOLLING`
+- Le backend utilise nodemon qui redémarre automatiquement lors des changements de fichiers
 
 ### Configuration
 
